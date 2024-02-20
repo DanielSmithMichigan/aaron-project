@@ -52,10 +52,10 @@ def index():
         <div id="chart"></div>
         <script>
             var options = {{
-                series: [{
+                series: [{{
                     "name": 'Sensor Value',
                     "data": {series_data}
-                }],
+                }}],
                 chart: {{
                     type: 'line',
                     height: 350
@@ -85,6 +85,7 @@ def index():
     </html>
     """
     return render_template_string(html_content)
+
 
 
 if __name__ == '__main__':
