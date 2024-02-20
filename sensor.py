@@ -24,19 +24,18 @@ def store_sensor_data():
 @app.route('/')
 def index():
     files = sorted(os.listdir(sensor_data_dir), reverse=True)[:10]  # Sort and get the latest 10 files
-    timestamps, values = [], []
+    series_data = []
 
     for filename in files:
         with open(f"{sensor_data_dir}/{filename}", 'r') as file:
             for line in file:
                 epoch, value = line.strip().split(',')
-                # Convert epoch to datetime string in a format ApexCharts can easily parse
-                timestamp = datetime.fromtimestamp(int(epoch)/1000).strftime('%Y-%m-%d %H:%M:%S')
-                timestamps.append(timestamp)
-                values.append(int(value))
+                # Convert epoch to milliseconds since Unix epoch (for JavaScript)
+                timestamp = int(epoch)
+                series_data.append([timestamp, int(value)])
     
-    # ApexCharts data preparation
-    series_data = list(zip(timestamps, values))
+    # Correcting the format for JavaScript
+    series_data_js = str(series_data).replace("'", "")
 
     # Serving an HTML page with the sensor data and an ApexChart
     html_content = f"""
@@ -54,7 +53,7 @@ def index():
             var options = {{
                 series: [{{
                     "name": 'Sensor Value',
-                    "data": {series_data}
+                    "data": {series_data_js}
                 }}],
                 chart: {{
                     type: 'line',
@@ -62,7 +61,6 @@ def index():
                 }},
                 xaxis: {{
                     type: 'datetime',
-                    // No need for categories here as we're providing datetime values directly in data
                 }},
                 stroke: {{
                     curve: 'smooth'
@@ -85,8 +83,6 @@ def index():
     </html>
     """
     return render_template_string(html_content)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
