@@ -53,8 +53,8 @@ def index():
         <script>
             var options = {{
                 series: [{
-                    name: 'Sensor Value',
-                    data: {series_data}
+                    "name": 'Sensor Value',
+                    "data": {series_data}
                 }],
                 chart: {{
                     type: 'line',
