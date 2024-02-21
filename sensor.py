@@ -24,7 +24,7 @@ def store_sensor_data():
 @app.route('/')
 def index():
     files = sorted(os.listdir(sensor_data_dir), reverse=True)[:10]  # Sort and get the latest 10 files
-    series_data = 5
+    series_data = []
 
     for filename in files:
         with open(f"{sensor_data_dir}/{filename}", 'r') as file:
