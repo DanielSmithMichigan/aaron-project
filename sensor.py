@@ -47,7 +47,7 @@ def index():
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
     <body>
-        <h1>Sensor Data Chart. Updated</h1>
+        <h1>Sensor Data Chart. Updated.</h1>
         <div id="chart"></div>
         <script>
             var options = {{
