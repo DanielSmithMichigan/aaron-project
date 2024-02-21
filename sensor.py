@@ -42,7 +42,7 @@ def index():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Sensor Data</title>
+        <title>Sensor Dat 2a</title>
         <!-- Include ApexCharts -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
