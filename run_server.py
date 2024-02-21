@@ -22,7 +22,7 @@ def main():
 
     try:
         while True:
-            time.sleep(30)  # Wait for 30 seconds before checking for updates
+            time.sleep(5)  # Wait for 30 seconds before checking for updates
             git_output = git_pull()
             print("Checking for updates...")
             if server_needs_restart(git_output):
